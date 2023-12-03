@@ -4,7 +4,7 @@ const { syncDb } = require("./lib/function.js");
 const { color } = require("./lib/color.js");
 const { Main, app } = require("./index.js");
 const conn = require("./config/config.json");
-const port = process.env.POR || 3000;
+const port = process.env.POR || 4000;
 
 async function startWeb() {
 	log(color("starting server...", "red"));
