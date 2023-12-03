@@ -1,0 +1,21 @@
+{
+	"srv": {
+		"host": "http://localhost",
+		"post": 3000,
+		"root": "*"
+	},
+	"msg": {
+		"srvErr": {
+			"status": false,
+			"message": "internal server error"
+		},
+		"needUrl": {
+			"status": false,
+			"message": "Silahkan Masukan Url"
+		},
+		"notfound": {
+			"status": false,
+			"message": "Halaman Tidak Di Temukan"
+		}
+	}
+}

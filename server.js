@@ -1,19 +1,22 @@
+const log = console.log;
+
 const { syncDb } = require("./lib/function.js");
+const { color } = require("./lib/color.js");
 const { Main, app } = require("./index.js");
 const conn = require("./config/config.json");
-const port = conn.srv.port;
+const port = process.env.POR || 3000;
 
 async function startWeb() {
-	console.log("starting server...");
-	await console.log("starting database");
+	log(color("starting server...", "red"));
+	await log(color("Starting Database...", "yellow"));
 	await syncDb();
 	setTimeout(() => {
 		app.listen(port, (req, res) => {
-			console.log(`server running in PORT: ${port}`);
+			log(color(`server running in PORT: ${port}✓`, "green"));
 		});
-	Main();
+		Main();
 	}, 1000);
 }
-startWeb()
+startWeb();
 
 module.exports = { startWeb };
