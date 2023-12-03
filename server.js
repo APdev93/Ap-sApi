@@ -1,7 +1,6 @@
 const log = console.log;
 
 const { syncDb } = require("./lib/function.js");
-const { color } = require("./lib/color.js");
 const { Main, app } = require("./index.js");
 const conn = require("./config/config.json");
 const port =  process.env.PORT || 3000
