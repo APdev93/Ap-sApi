@@ -1,0 +1,29 @@
+{
+   "admin@api.com": {
+      "fullname": "Ardian Permana",
+      "password": "admin",
+      "isAdmin": true,
+      "api": {
+         "key": "ap93",
+         "limit": 99998
+      }
+   },
+   "arr@a.a": {
+      "fullname": "ArrP",
+      "password": "app",
+      "isAdmin": false,
+      "api": {
+         "key": "yLQf807eEVMv9HuzkyCi0eMcJ",
+         "limit": 15
+      }
+   },
+   "ardiangaming971@gmail.com": {
+      "fullname": "Ardian Gaming",
+      "password": "ap93",
+      "isAdmin": false,
+      "api": {
+         "key": "Nhz4qDxdsgJiKmyBoIzIaADaf",
+         "limit": 15
+      }
+   }
+}

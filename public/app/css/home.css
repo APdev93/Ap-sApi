@@ -1,0 +1,93 @@
+.container {
+	align-items: center;
+	height: 100vh;
+	margin: auto;
+}
+
+.con-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+}
+
+.con-title {
+	text-align: left;
+}
+
+.con-title h1 {
+	font-weight: bold;
+	margin-left: 10px;
+}
+
+.typedtext h3 {
+	font-weight: bold;
+	margin-left: 10px;
+	color: #ff0157;
+}
+
+.btn {
+	padding: 10px;
+	border-radius: 15px;
+}
+
+.home-container {
+	background: linear-gradient(45deg, #6f0229, #000d80);
+}
+
+.btn-contain {
+	margin-top: 25px;
+	margin-left: 10px;
+	display: flex;
+	flex-direction: row;
+	gap: 15px;
+}
+
+.btn-login {
+	font-size: 20px;
+	font-weight: bold;
+	color: #00bc18;
+	background-color: transparent;
+	width: 100px;
+	border: 1px solid #00bc18;
+}
+
+.btn-login:hover {
+	background-color: #00bc18;
+	box-shadow: none !important;
+}
+
+.btn-regist {
+	font-size: 20px;
+	font-weight: bold;
+	color: #fa4011;
+	background-color: transparent;
+	width: 100px;
+	border: 1px solid #fa4011;
+}
+
+.btn-regist:hover {
+	background-color: #fa4011;
+	box-shadow: none !important;
+}
+
+.btn-dash {
+	font-size: 20px;
+	font-weight: bold;
+	color: #1764f1;
+	background-color: transparent;
+	width: 150px;
+	border: 1px solid #1764f1;
+}
+
+.btn-dash:hover {
+	background-color: #1764f1;
+	box-shadow: none !important;
+}
+
+.a {
+	color: #ff0157;
+}
+.p {
+	color: #00bc18;
+}
