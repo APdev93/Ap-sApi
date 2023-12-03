@@ -20,6 +20,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
+    "fake-useragent": "^1.0.1",
     "fs": "^0.0.1-security",
     "json-parse": "^1.0.3",
     "node-cache": "^5.1.2",

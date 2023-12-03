@@ -6,12 +6,12 @@ const conn = require("./config/config.json");
 const port =  process.env.PORT || 3000
 
 async function startWeb() {
-	log(color("starting server...", "red"));
-	await log(color("Starting Database...", "yellow"));
+	log("starting server...");
+	await log("Starting Database...");
 	await syncDb();
 	setTimeout(() => {
 		app.listen(port, (req, res) => {
-			log(color(`server running in PORT: ${port}✓`, "green"));
+			log(`server running in PORT: ${port}✓`);
 		});
 		Main();
 	}, 1000);
