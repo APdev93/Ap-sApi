@@ -21,8 +21,14 @@ router.use(
 	}),
 );
 
+const userDb = `${root}/database/user.json`;
+
+if (!fs.existsSync(userDb)) {
+	fs.writeFileSync(userDb, "{}", "utf-8");
+}
+
 function isAuth(req, res, next) {
-	if (req.session.email) {
+	if (req.session && req.session.user) {
 		return next();
 	}
 	res.redirect("/masuk");
@@ -39,24 +45,35 @@ router.post("/regist", (req, res, next) => {
 });
 
 router.post("/login", async (req, res, next) => {
-	const { email } = req.body;
-	if (email) {
+	const { number } = req.body;
+	if (number) {
 		let Found = await login(req, res);
 		if (Found) {
-			console.log(`=> ${email} Logged in`);
-			req.session.email = email;
+			const userData = JSON.parse(fs.readFileSync(userDb, "utf-8"));
+			// Mencari pengguna berdasarkan nomor telepon
+			const user = userData[number];
+			req.session.user = user;
+			console.log(user);
+			console.log(`=> ${number} Logged in`);
 			setTimeout(function () {
-				res.redirect("/auth/dash");
+				res.redirect("/dashboard");
 			}, 2000);
 		} else {
 			res.status(404).json({ msg: false });
-			console.log(`=> Login failed for ${email}`);
+			console.log(`=> Login failed for ${number}`);
 		}
 	}
 });
 
 router.get("/dash", isAuth, (req, res, next) => {
-	res.send("dashboard");
+	let usr = req.session.user;
+	const data = {
+		user: usr.fullname,
+		key: usr.api.key,
+		limit: usr.api.limit,
+		usage: usr.api.usage,
+	};
+	res.json(data);
 });
 
 router.get("/logout", (req, res, next) => {

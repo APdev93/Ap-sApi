@@ -28,6 +28,7 @@ const checkKey = async (req, res, next) => {
 		}
 		// Mengurangi batas penggunaan
 		user.api.limit--;
+		user.api.usage++
 		// Menyimpan perubahan ke dalam file
 		await fs.writeFile(`${root}/database/user.json`, JSON.stringify(users));
 		// API key valid, lanjutkan ke endpoint berikutnya

@@ -1,0 +1,18 @@
+<div id="con"></div>
+<script type="text/javascript" charset="utf-8">
+	const xhr = new XMLHttpRequest();
+	xhr.open("GET", "/auth/dash");
+	xhr.responseType = "json";
+
+	xhr.onload = () => {
+		const con = document.getElementById("con");
+		const u = xhr.response;
+		con.innerHTML = `
+	   <h3>username: ${u.user}</h3>
+	   <h3>apikey: ${u.key}</h3>
+	   <h3>limit: ${u.limit}</h3>
+	   <h3>penggunaan: ${u.usage}</h3>
+	   `;
+	};
+	xhr.send();
+</script>

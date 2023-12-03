@@ -26,11 +26,24 @@ async function Main() {
 		session({
 			secret: "sessionkey",
 			resave: false,
-			saveUninitialized: true,
+			saveUninitialized: false,
+			cookie: {
+				maxAge: 30 * 24 * 60 * 60 * 1000, // atur masa aktif cookies selama 1 bulan
+			},
 		}),
 	);
 
+	function isAuth(req, res, next) {
+		if (req.session && req.session.user) {
+			return next();
+		}
+		res.redirect("/masuk");
+	}
+
 	//main route
+	app.get("/dashboard", isAuth, (req, res) => {
+		res.sendFile("./public/pages/dashboard.html", rootPath);
+	});
 	app.get("/", (req, res) => {
 		res.sendFile("./public/index.html", rootPath);
 	});
