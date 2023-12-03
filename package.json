@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "node main.js"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "ArdianPermana",
