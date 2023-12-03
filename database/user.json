@@ -4,8 +4,8 @@
       "password": "app",
       "isAdmin": true,
       "api": {
-         "key": "aMnG8ZFVyjHX6qCktUVyT0UOX",
-         "limit": 15,
+         "key": "ap",
+         "limit": 100,
          "usage": 0
       }
    }

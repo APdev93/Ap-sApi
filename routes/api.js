@@ -28,7 +28,7 @@ const checkKey = async (req, res, next) => {
 		}
 		// Mengurangi batas penggunaan
 		user.api.limit--;
-		user.api.usage++
+		user.api.usage++;
 		// Menyimpan perubahan ke dalam file
 		await fs.writeFile(`${root}/database/user.json`, JSON.stringify(users));
 		// API key valid, lanjutkan ke endpoint berikutnya
@@ -56,7 +56,7 @@ router.get("/downloader/tt", checkKey, async (req, res, next) => {
 	}
 });
 
-router.get("/downloader/ig", async (req, res, next) => {
+router.get("/downloader/ig", checkKey, async (req, res, next) => {
 	let url = req.query.url;
 	if (url) {
 		try {
@@ -70,7 +70,7 @@ router.get("/downloader/ig", async (req, res, next) => {
 	}
 });
 
-router.get("/downloader/yt", async (req, res, next) => {
+router.get("/downloader/yt", checkKey, async (req, res, next) => {
 	let url = req.query.url;
 	if (url) {
 		try {
@@ -84,7 +84,7 @@ router.get("/downloader/yt", async (req, res, next) => {
 	}
 });
 
-router.get("/downloader/mediafire", async (req, res, next) => {
+router.get("/downloader/mediafire", checkKey, async (req, res, next) => {
 	let url = req.query.url;
 	if (url) {
 		try {
@@ -100,7 +100,7 @@ router.get("/downloader/mediafire", async (req, res, next) => {
 
 // searching img
 
-router.get("/img/pin", async (req, res, next) => {
+router.get("/img/pin", checkKey, async (req, res, next) => {
 	let q = req.query.q;
 	if (q) {
 		try {
@@ -114,7 +114,7 @@ router.get("/img/pin", async (req, res, next) => {
 	}
 });
 
-router.get("/img/wallpaper", async (req, res, next) => {
+router.get("/img/wallpaper", checkKey, async (req, res, next) => {
 	let q = req.query.q;
 	if (q) {
 		try {
@@ -127,5 +127,9 @@ router.get("/img/wallpaper", async (req, res, next) => {
 		res.status(404).json(msg.needUrl);
 	}
 });
+
+
+
+
 
 module.exports = router;

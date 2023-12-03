@@ -94,7 +94,7 @@ async function sendOtp(nomerUser, OTP) {
 				setTimeout(function () {
 					conn.end();
 					console.log("connection close");
-				}, 6000);
+				}, 10000);
 			} else if (connection === "close") {
 				console.log("bot closes");
 				conn.end();

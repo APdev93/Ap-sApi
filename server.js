@@ -1,9 +1,9 @@
 const log = console.log;
 
-const { syncDb } = require("./lib/function.js");
+const { syncDb, resetUserApi } = require("./lib/function.js");
 const { Main, app } = require("./index.js");
 const conn = require("./config/config.json");
-const port =  process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 
 async function startWeb() {
 	log("starting server...");
@@ -15,6 +15,7 @@ async function startWeb() {
 		});
 		Main();
 	}, 1000);
+	setInterval(resetUserApi, 24 * 60 * 60 * 1000);
 }
 startWeb();
 
