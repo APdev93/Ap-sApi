@@ -17,6 +17,7 @@ const port = conn.srv.port;
 const rootPath = { root: __dirname };
 
 async function Main() {
+	const isRepair = true;
 	app.use(express.static("public"));
 	app.use(bodyParser.urlencoded({ extended: true }));
 	/* Agar api bisa di akses dari luar*/
@@ -39,13 +40,16 @@ async function Main() {
 		}
 		res.redirect("/masuk");
 	}
-
 	//main route
 	app.get("/dashboard", isAuth, (req, res) => {
 		res.sendFile("./public/pages/dashboard.html", rootPath);
 	});
 	app.get("/", (req, res) => {
-		res.sendFile("./public/index.html", rootPath);
+		if (isRepair == true) {
+			res.sendFile("./public/repair.html", rootPath);
+		} else {
+			res.sendFile("./public/index.html", rootPath);
+		}
 	});
 	app.get("/masuk", (req, res) => {
 		res.sendFile("./public/login.html", rootPath);

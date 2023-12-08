@@ -4,6 +4,10 @@
 		"post": 3000,
 		"root": "*"
 	},
+	"web": {
+		"name": "Ap's Api",
+		"maintenance": true
+	},
 	"msg": {
 		"srvErr": {
 			"status": false,
