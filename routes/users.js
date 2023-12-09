@@ -52,6 +52,7 @@ router.post("/login", async (req, res, next) => {
 			const userData = JSON.parse(fs.readFileSync(userDb, "utf-8"));
 			// Mencari pengguna berdasarkan nomor telepon
 			const user = userData[number];
+			req.session.usrnumber = number;
 			req.session.user = user;
 			console.log(user);
 			console.log(`=> ${number} Logged in`);
@@ -67,7 +68,9 @@ router.post("/login", async (req, res, next) => {
 
 router.get("/dash", isAuth, (req, res, next) => {
 	let usr = req.session.user;
+	let number = req.session.usrnumber;
 	const data = {
+		number: number,
 		user: usr.fullname,
 		key: usr.api.key,
 		limit: usr.api.limit,

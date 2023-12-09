@@ -19,6 +19,7 @@ const rootPath = { root: __dirname };
 async function Main() {
 	const isRepair = true;
 	app.use(express.static("public"));
+	app.use(express.static("public/pages/dashboard"));
 	app.use(bodyParser.urlencoded({ extended: true }));
 	/* Agar api bisa di akses dari luar*/
 	app.use(cors({ origin: conn.srv.root }));
@@ -42,7 +43,7 @@ async function Main() {
 	}
 	//main route
 	app.get("/dashboard", isAuth, (req, res) => {
-		res.sendFile("./public/pages/dashboard.html", rootPath);
+		res.sendFile("./public/pages/dashboard/index.html", rootPath);
 	});
 	app.get("/", (req, res) => {
 		if (isRepair == true) {
