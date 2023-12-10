@@ -5,7 +5,32 @@ const session = require("express-session");
 const router = express.Router();
 
 const fs = require("fs");
-const { makeUsers, login, syncDb, sleep } = require(`${root}/lib/function.js`);
+const { makeUsers, login, syncDb, sleep, log } = require(
+	`${root}/lib/function.js`,
+);
+
+const userStats = loadStats();
+function loadStats() {
+	try {
+		const statsData = fs.readFileSync(`${root}/database/stats.json`);
+		return JSON.parse(statsData);
+	} catch (error) {
+		log("Error reading user stats:", error);
+		return {
+			user: {
+				total: 0,
+				online: 0,
+			},
+		};
+	}
+}
+
+function bcStats() {
+	fs.writeFileSync(
+		`${root}/database/stats.json`,
+		JSON.stringify(userStats, null, 3),
+	);
+}
 
 const config = require(`${root}/config/config.json`);
 const rootPath = { root: __dirname };
@@ -37,6 +62,8 @@ function isAuth(req, res, next) {
 router.post("/regist", (req, res, next) => {
 	if (req) {
 		makeUsers(req, res);
+		userStats.user.total++;
+		bcStats();
 		syncDb();
 		setTimeout(function () {
 			res.redirect("/masuk");
@@ -54,14 +81,17 @@ router.post("/login", async (req, res, next) => {
 			const user = userData[number];
 			req.session.usrnumber = number;
 			req.session.user = user;
-			console.log(user);
-			console.log(`=> ${number} Logged in`);
+			// Menambah total user online ke database
+			userStats.user.online++;
+			bcStats();
+
+			log(`${number} Logged in`);
 			setTimeout(function () {
 				res.redirect("/dashboard");
 			}, 2000);
 		} else {
 			res.status(404).json({ msg: false });
-			console.log(`=> Login failed for ${number}`);
+			log(`Login failed for ${number}`);
 		}
 	}
 });
@@ -81,6 +111,7 @@ router.get("/dash", isAuth, (req, res, next) => {
 
 router.get("/logout", (req, res, next) => {
 	req.session.destroy();
+	userStats.user.online--;
 	setTimeout(function () {
 		res.redirect("/masuk");
 	}, 2000);

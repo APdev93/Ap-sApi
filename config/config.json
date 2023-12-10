@@ -1,4 +1,4 @@
-{
+{  
 	"srv": {
 		"host": "http://localhost",
 		"post": 3000,

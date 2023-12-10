@@ -1,20 +1,19 @@
-const log = console.log;
-
-const { syncDb, resetUserApi } = require("./lib/function.js");
+const { syncDb, resetUserApi, resetStats, log } = require("./lib/function.js");
 const { Main, app } = require("./index.js");
 const conn = require("./config/config.json");
 const port = process.env.PORT || 3000;
 
 async function startWeb() {
-	log("starting server...");
-	await log("Starting Database...");
+	log("Memulai server...");
 	await syncDb();
+	await resetStats();
+	await resetUserApi();
 	setTimeout(() => {
 		app.listen(port, (req, res) => {
 			log(`server running in PORT: ${port}✓`);
 		});
 		Main();
-	}, 1000);
+	}, 2000);
 	setInterval(resetUserApi, 24 * 60 * 60 * 1000);
 }
 startWeb();

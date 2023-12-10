@@ -12,12 +12,12 @@ const conn = require("./config/config.json");
 const api = require("./routes/api.js");
 const admin = require("./routes/admin.js");
 const users = require("./routes/users.js");
+const main = require("./routes/main.js")
 // config
 const port = conn.srv.port;
 const rootPath = { root: __dirname };
 
 async function Main() {
-	const isRepair = true;
 	app.use(express.static("public"));
 	app.use(express.static("public/pages/dashboard"));
 	app.use(bodyParser.urlencoded({ extended: true }));
@@ -46,11 +46,7 @@ async function Main() {
 		res.sendFile("./public/pages/dashboard/index.html", rootPath);
 	});
 	app.get("/", (req, res) => {
-		if (isRepair == true) {
-			res.sendFile("./public/repair.html", rootPath);
-		} else {
-			res.sendFile("./public/index.html", rootPath);
-		}
+		res.sendFile("./public/index.html", rootPath);
 	});
 	app.get("/masuk", (req, res) => {
 		res.sendFile("./public/login.html", rootPath);
@@ -93,6 +89,7 @@ async function Main() {
 	app.use("/admin", admin);
 	app.use("/auth", users);
 	app.use("/api", api);
+	app.use("/main", main)
 
 	/*Pengalihan jika route url tidak ada, tidak boleh di pindah ke atas*/
 	app.use("/", (req, res) => {

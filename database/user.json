@@ -5,8 +5,20 @@
       "isAdmin": true,
       "api": {
          "key": "ap",
-         "limit": 100,
-         "usage": 0
+         "limit": 15,
+         "usage": 0,
+         "last_reset": "12:38:17"
+      }
+   },
+   "6287845025555": {
+      "fullname": "Rahman Arzadin",
+      "password": "zd",
+      "isAdmin": false,
+      "api": {
+         "key": "R8F8DG67thVL1a1NwnuBBb2f3",
+         "limit": 15,
+         "usage": 0,
+         "last_reset": "12:38:17"
       }
    }
 }
