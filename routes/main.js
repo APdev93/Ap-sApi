@@ -3,10 +3,11 @@ const root = process.cwd();
 const express = require("express");
 const router = express.Router();
 
-const { getInfo } = require(`${root}/lib/function.js`);
-
 router.use("/info", async (req, res, next) => {
-	let date = new Date();
+	let tanggalWaktu = new Date().toLocaleString("en-US", {
+		timeZone: "Asia/Makassar",
+	});
+	let date = new Date(tanggalWaktu);
 	let jam = date.getHours();
 	let menit = date.getMinutes();
 	let detik = date.getSeconds();
@@ -14,16 +15,18 @@ router.use("/info", async (req, res, next) => {
 	let neww = performance.now();
 	let mili = old / neww;
 	let milsec = mili.toFixed(3);
-	let port = process.env.PORT || 8080 || 5000 || 3000;
+	let port = process.env.PORT;
+
+	let dd = date.getDate();
+	let yy = date.getFullYear();
+	let mm = new Intl.DateTimeFormat("id-ID", { month: "long" }).format(Dates);
+
 	let status = {
 		status: "online",
 		port: port,
-		time: `${jam} : ${menit} : ${detik} `,
+		time: `${jam}:${menit}:${detik} WIB`,
+		date: `${dd}/${mm}/${yy}`,
 		speed: `${milsec}ms`,
-		info: {
-			owner: "ardian",
-			apikey: "",
-		},
 	};
 	res.json(status);
 });
