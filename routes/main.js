@@ -19,7 +19,7 @@ router.use("/info", async (req, res, next) => {
 
 	let dd = date.getDate();
 	let yy = date.getFullYear();
-	let mm = new Intl.DateTimeFormat("id-ID", { month: "long" }).format(Dates);
+	let mm = new Intl.DateTimeFormat("id-ID", { month: "long" }).format(date);
 
 	let status = {
 		status: "online",

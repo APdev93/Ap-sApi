@@ -1,8 +1,10 @@
-{  
+{
 	"srv": {
 		"host": "http://localhost",
-		"post": 3000,
-		"root": "*"
+		"post": 2055,
+		"root": "*",
+		"req_limit": 500,
+		"detect_window": 5000
 	},
 	"web": {
 		"name": "Ap's Api",

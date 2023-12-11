@@ -3,21 +3,24 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 
+const ipfilter = require("express-ipfilter").IpFilter;
+
 const app = express();
 
 /* Server */
-const { syncDb, makeOtp } = require("./lib/function.js");
+const { syncDb, makeOtp, log } = require("./lib/function.js");
 const { sendOtp } = require("./main.js");
 const conn = require("./config/config.json");
 const api = require("./routes/api.js");
 const admin = require("./routes/admin.js");
 const users = require("./routes/users.js");
-const main = require("./routes/main.js")
+const main = require("./routes/main.js");
 // config
 const port = conn.srv.port;
 const rootPath = { root: __dirname };
 
 async function Main() {
+	log("server running");
 	app.use(express.static("public"));
 	app.use(express.static("public/pages/dashboard"));
 	app.use(bodyParser.urlencoded({ extended: true }));
@@ -41,11 +44,47 @@ async function Main() {
 		}
 		res.redirect("/masuk");
 	}
+
+	// anti ddos
+
+	const blockedIPs = [];
+
+	const DDoS_THRESHOLD = conn.srv.req_limit;
+	const DETECTION_WINDOW = conn.srv.detect_window;
+
+	const requestTracker = {};
+
+	// Middleware untuk melacak dan memblokir IP
+	const ipFilter = ipfilter({
+		detectIp: req => req.ip,
+		forbiddenResponse: "IP Anda diblokir karena aktivitas yang mencurigakan.",
+		log: true,
+	});
+
+	app.use(ipFilter);
+
+	app.use((req, res, next) => {
+		const clientIP = req.ip;
+		requestTracker[clientIP] = (requestTracker[clientIP] || 0) + 1;
+		setTimeout(() => {
+			requestTracker[clientIP] = 0;
+		}, DETECTION_WINDOW);
+		if (
+			requestTracker[clientIP] > DDoS_THRESHOLD &&
+			!blockedIPs.includes(clientIP)
+		) {
+			log(`Deteksi DDoS dari IP: ${clientIP}, blokir IP.`);
+			blockedIPs.push(clientIP);
+		}
+		next();
+	});
+
 	//main route
 	app.get("/dashboard", isAuth, (req, res) => {
 		res.sendFile("./public/pages/dashboard/index.html", rootPath);
 	});
 	app.get("/", (req, res) => {
+		log(`Ada yang mengunjungi dari ${req.ip}`);
 		res.sendFile("./public/index.html", rootPath);
 	});
 	app.get("/masuk", (req, res) => {
@@ -89,7 +128,7 @@ async function Main() {
 	app.use("/admin", admin);
 	app.use("/auth", users);
 	app.use("/api", api);
-	app.use("/main", main)
+	app.use("/main", main);
 
 	/*Pengalihan jika route url tidak ada, tidak boleh di pindah ke atas*/
 	app.use("/", (req, res) => {
