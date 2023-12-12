@@ -3,8 +3,8 @@
 		"host": "http://localhost",
 		"post": 2055,
 		"root": "*",
-		"req_limit": 500,
-		"detect_window": 5000
+		"req_limit": 100,
+		"detect_window": 15000
 	},
 	"web": {
 		"name": "Ap's Api",

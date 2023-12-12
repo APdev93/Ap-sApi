@@ -48,11 +48,10 @@ async function Main() {
 	// anti ddos
 
 	const blockedIPs = [];
+	const requestTracker = {};
 
 	const DDoS_THRESHOLD = conn.srv.req_limit;
 	const DETECTION_WINDOW = conn.srv.detect_window;
-
-	const requestTracker = {};
 
 	// Middleware untuk melacak dan memblokir IP
 	const ipFilter = ipfilter({
@@ -84,7 +83,8 @@ async function Main() {
 		res.sendFile("./public/pages/dashboard/index.html", rootPath);
 	});
 	app.get("/", (req, res) => {
-		log(`Ada yang mengunjungi dari ${req.ip}`);
+	   let ip = req.ip
+	   console.log(`request from: ${ip}`)
 		res.sendFile("./public/index.html", rootPath);
 	});
 	app.get("/masuk", (req, res) => {
