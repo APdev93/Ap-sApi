@@ -1,14 +1,1 @@
-{
-	"6287845032372": {
-		"fullname": "Ardian Permana",
-		"password": "app",
-		"isAdmin": true,
-		"api": {
-		   "key": "ap", 
-		   "limit": 14, 
-		   "usage": 1, 
-		   "last_reset": "15:2:47" 
-		   
-		}
-	}
-}
+{"6287845032372":{"fullname":"Ardian Permana","password":"app","isAdmin":true,"api":{"key":"ap","limit":14,"usage":1,"last_reset":"10:57:0"}}}
