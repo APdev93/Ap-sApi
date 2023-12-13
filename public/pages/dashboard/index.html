@@ -88,12 +88,26 @@
 				<input type="checkbox" id="switch-mode" hidden />
 				<label for="switch-mode" class="switch-mode"></label>
 				<div class="userdata">
-					<h5>username</h5>
-					<h4>62xxxxxxxxx</h4>
+					<h5 id="username">username</h5>
+					<h4 id="number">62xxxxxxxxx</h4>
 				</div>
 				<a href="#" class="profile">
 					<i class="bx bxs-user-circle"></i>
 				</a>
+				<script type="text/javascript" charset="utf-8">
+					var xhr = new XMLHttpRequest();
+					xhr.open("GET", "/auth/dash");
+					xhr.responseType = "json";
+
+					xhr.onload = () => {
+					   const data = xhr.response;
+						let user = document.getElementById("username");
+						let numb = document.getElementById("number");
+						user.innerHTML = data.user;
+						numb.innerHTML = data.number
+					};
+					xhr.send();
+				</script>
 			</nav>
 			<!-- NAVBAR -->
 
@@ -149,7 +163,7 @@
 							</div>
 							<ul class="todo-list">
 								<li class="get">
-										<p>feature GET</p>
+									<p>feature GET</p>
 									<i class="bx bx-dots-vertical-rounded"></i>
 								</li>
 								<li class="post">
