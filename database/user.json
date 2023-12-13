@@ -1,4 +1,26 @@
 {
+   "6287": {
+      "fullname": "test test",
+      "password": "an",
+      "isAdmin": false,
+      "api": {
+         "key": "xOcMv1qtURzSyArgyu6SelZNN",
+         "limit": 15,
+         "usage": 0,
+         "last_reset": "14:26:5"
+      }
+   },
+   "62876": {
+      "fullname": "Tes",
+      "password": "j",
+      "isAdmin": false,
+      "api": {
+         "key": "UVeprLOf107mFZKV4lJAwr0WF",
+         "limit": 15,
+         "usage": 0,
+         "last_reset": ""
+      }
+   },
    "6287845032372": {
       "fullname": "Ardian Permana",
       "password": "app",
@@ -7,7 +29,7 @@
          "key": "ap",
          "limit": 15,
          "usage": 0,
-         "last_reset": "11:32:6"
+         "last_reset": "14:26:5"
       }
    }
 }

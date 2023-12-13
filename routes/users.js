@@ -117,6 +117,13 @@ router.get("/logout", (req, res, next) => {
 	}, 2000);
 });
 
+router.get("/stats", (req, res) => {
+	let data = {
+		total: userStats.user.total,
+		online: userStats.user.online,
+	};
+	res.json(data);
+});
 router.post("/change-pw", (req, res, next) => {});
 
 module.exports = router;
