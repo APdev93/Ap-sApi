@@ -3,6 +3,24 @@ const root = process.cwd();
 const express = require("express");
 const router = express.Router();
 
+const {log}= require(`${root}/lib/function.js`)
+
+const userStats = loadStats();
+function loadStats() {
+	try {
+		const statsData = fs.readFileSync(`${root}/database/stats.json`);
+		return JSON.parse(statsData);
+	} catch (error) {
+		log("Error reading user stats:", error);
+		return {
+			user: {
+				total: 0,
+				online: 0,
+			},
+		};
+	}
+}
+
 router.use("/info", async (req, res, next) => {
 	let tanggalWaktu = new Date().toLocaleString("en-US", {
 		timeZone: "Asia/Makassar",
@@ -29,6 +47,14 @@ router.use("/info", async (req, res, next) => {
 		speed: `${milsec}ms`,
 	};
 	res.json(status);
+});
+
+router.get("/stats", (req, res) => {
+	let data = {
+		total: userStats.user.total,
+		online: userStats.user.online,
+	};
+	res.json(data);
 });
 
 module.exports = router;

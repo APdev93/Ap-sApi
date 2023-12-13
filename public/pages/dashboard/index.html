@@ -95,16 +95,16 @@
 					<i class="bx bxs-user-circle"></i>
 				</a>
 				<script type="text/javascript" charset="utf-8">
-					var xhr = new XMLHttpRequest();
+					let xhr = new XMLHttpRequest();
 					xhr.open("GET", "/auth/dash");
 					xhr.responseType = "json";
 
 					xhr.onload = () => {
-					   const data = xhr.response;
+						const data = xhr.response;
 						let user = document.getElementById("username");
 						let numb = document.getElementById("number");
 						user.innerHTML = data.user;
-						numb.innerHTML = data.number
+						numb.innerHTML = data.number;
 					};
 					xhr.send();
 				</script>
@@ -134,14 +134,14 @@
 							<li>
 								<i class="bx bxs-user-plus"></i>
 								<span class="text">
-									<h3>0</h3>
+									<h3 id="t-usr">0</h3>
 									<p>Total User</p>
 								</span>
 							</li>
 							<li>
 								<i class="bx bxs-user-check"></i>
 								<span class="text">
-									<h3>0</h3>
+									<h3 id="t-log">0</h3>
 									<p>User Uogin</p>
 								</span>
 							</li>
