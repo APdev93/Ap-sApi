@@ -1,51 +1,113 @@
-// Selecting the sidebar and buttons
-const sidebar = document.querySelector(".sidebar");
-const sidebarOpenBtn = document.querySelector("#sidebar-open");
-const sidebarCloseBtn = document.querySelector("#sidebar-close");
-const sidebarLockBtn = document.querySelector("#lock-icon");
+const allSideMenu = document.querySelectorAll("#sidebar .side-menu.top li a");
 
-// Function to toggle the lock state of the sidebar
-const toggleLock = () => {
-  sidebar.classList.toggle("locked");
-  // If the sidebar is not locked
-  if (!sidebar.classList.contains("locked")) {
-    sidebar.classList.add("hoverable");
-    sidebarLockBtn.classList.replace("bx-lock-alt", "bx-lock-open-alt");
-  } else {
-    sidebar.classList.remove("hoverable");
-    sidebarLockBtn.classList.replace("bx-lock-open-alt", "bx-lock-alt");
-  }
-};
+allSideMenu.forEach(item => {
+	const li = item.parentElement;
 
-// Function to hide the sidebar when the mouse leaves
-const hideSidebar = () => {
-  if (sidebar.classList.contains("hoverable")) {
-    sidebar.classList.add("close");
-  }
-};
+	item.addEventListener("click", function () {
+		allSideMenu.forEach(i => {
+			i.parentElement.classList.remove("active");
+		});
+		li.classList.add("active");
+	});
+});
 
-// Function to show the sidebar when the mouse enter
-const showSidebar = () => {
-  if (sidebar.classList.contains("hoverable")) {
-    sidebar.classList.remove("close");
-  }
-};
+// TOGGLE SIDEBAR
+const menuBar = document.querySelector("#content nav .bx.bx-menu");
+const sidebar = document.getElementById("sidebar");
 
-// Function to show and hide the sidebar
-const toggleSidebar = () => {
-  sidebar.classList.toggle("close");
-};
+menuBar.addEventListener("click", function () {
+	sidebar.classList.toggle("hide");
+});
 
-// If the window width is less than 800px, close the sidebar and remove hoverability and lock
-if (window.innerWidth < 800) {
-  sidebar.classList.add("close");
-  sidebar.classList.remove("locked");
-  sidebar.classList.remove("hoverable");
+if (window.innerWidth < 768) {
+	sidebar.classList.add("hide");
+} else if (window.innerWidth > 576) {
+	searchButtonIcon.classList.replace("bx-x", "bx-search");
+	searchForm.classList.remove("show");
 }
 
-// Adding event listeners to buttons and sidebar for the corresponding actions
-sidebarLockBtn.addEventListener("click", toggleLock);
-sidebar.addEventListener("mouseleave", hideSidebar);
-sidebar.addEventListener("mouseenter", showSidebar);
-sidebarOpenBtn.addEventListener("click", toggleSidebar);
-sidebarCloseBtn.addEventListener("click", toggleSidebar);
+const switchMode = document.getElementById("switch-mode");
+
+switchMode.addEventListener("change", function () {
+	if (this.checked) {
+		document.body.classList.add("dark");
+	} else {
+		document.body.classList.remove("dark");
+	}
+});
+
+//MENU LIST
+const fitur = document.getElementById("features");
+const fName = document.getElementById("feature-name");
+const ftop = document.getElementById("ftop");
+
+const dash = document.getElementById("dashboard");
+const downloader = document.getElementById("downloader");
+
+dash.addEventListener("click", () => {
+	fName.innerHTML = "home";
+	fitur.innerHTML = "";
+	ftop.innerHTML = `
+	            <ul class="box-info">
+							<li>
+								<i class="bx bxs-user-plus"></i>
+								<span class="text">
+									<h3>0</h3>
+									<p>Total User</p>
+								</span>
+							</li>
+							<li>
+								<i class="bx bxs-user-check"></i>
+								<span class="text">
+									<h3>0</h3>
+									<p>User Uogin</p>
+								</span>
+							</li>
+							<li>
+								<i class="bx bxs-dollar-circle"></i>
+								<span class="text">
+									<h3>0</h3>
+									<p>Total Request</p>
+								</span>
+							</li>
+						</ul>`;
+});
+
+downloader.addEventListener("click", () => {
+	fName.innerHTML = "downloader";
+	ftop.innerHTML = "";
+	fitur.innerHTML = `
+						<div class="todo">
+							<div class="head">
+								<h3>Downloader</h3>
+								<i class="bx bx-filter"></i>
+							</div>
+							<ul class="todo-list">
+								<li class="get">
+								  <a href="/api/downloader/yt?url=url&apikey=apikey">
+									<p>YouTube</p>
+									</a>
+									<i class="bx bx-dots-vertical-rounded"></i>
+								</li>
+								<li class="get">
+								  <a href="/api/downloader/ig?url=url&apikey=apikey">
+									<p>Instagram</p>
+									</a>
+									<i class="bx bx-dots-vertical-rounded"></i>
+								</li>
+								<li class="get">
+								  <a href="/api/downloader/tt?url=url&apikey=apikey">
+									<p>Tiktok</p>
+									</a>
+									<i class="bx bx-dots-vertical-rounded"></i>
+								</li>
+								<li class="get">
+								  <a href="/api/downloader/mf?url=url&apikey=apikey">
+									<p>MediaFire</p>
+									</a>
+									<i class="bx bx-dots-vertical-rounded"></i>
+								</li>
+							</ul>
+						</div>
+   `;
+});

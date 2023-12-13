@@ -2,119 +2,177 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Dashboard</title>
-		<link rel="stylesheet" href="style.css" />
-		<!-- Boxicons CSS -->
+
+		<!-- Boxicons -->
 		<link
-			flex
-			href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+			href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
 			rel="stylesheet" />
-		<script src="script.js" defer></script>
+		<!-- My CSS -->
+		<link rel="stylesheet" href="style.css" />
+
+		<title>Ap's Api Dashboard</title>
 	</head>
 	<body>
-		<nav class="sidebar locked shadow">
-			<div class="logo_items flex">
-				<span class="nav_image">
-					<img src="images/logo.png" alt="logo_img" />
-				</span>
-				<h3 class="logo_name">
-					<span class="a">A</span><span class="p">p</span> 's Api
-				</h3>
-				<i class="bx bx-lock-alt" id="lock-icon" title="Unlock Sidebar"></i>
-				<i class="bx bx-x" id="sidebar-close"></i>
-			</div>
-
-			<div class="menu_container">
-				<div class="menu_items">
-					<ul class="menu_item">
-						<div class="menu_title flex">
-							<span class="title">Dashboard</span>
-							<span class="line"></span>
-						</div>
-						<li class="item">
-							<a href="#" class="link flex">
-								<i class="bx bx-home-alt"></i>
-								<span>Overview</span>
-							</a>
-						</li>
-						<li class="item">
-							<a href="#" class="link flex">
-								<i class="bx bx-grid-alt"></i>
-								<span>All Projects</span>
-							</a>
-						</li>
-					</ul>
-
-					<ul class="menu_item">
-						<div class="menu_title flex">
-							<span class="title">Feature</span>
-							<span class="line"></span>
-						</div>
-						<li class="item">
-							<a href="#" class="link flex">
-								<i class="bx bxs-magic-wand"></i>
-								<span>feature1</span>
-							</a>
-						</li>
-					</ul>
-
-					<ul class="menu_item">
-						<div class="menu_title flex">
-							<span class="title">Settings</span>
-							<span class="line"></span>
-						</div>
-						<li class="item">
-							<a href="#" class="link flex">
-								<i class="bx bx-cog"></i>
-								<span>Setting</span>
-							</a>
-						</li>
-					</ul>
+		<!-- SIDEBAR -->
+		<section id="sidebar">
+			<a href="#" class="brand">
+				<div class="logo">
+					<img width="40" src="img/logo.png" alt="" />
 				</div>
 
-				<div class="sidebar_profile flex">
-					<span class="nav_image">
-						<img src="images/profile.jpg" alt="logo_img" />
-					</span>
-					<div id="data_user" class="data_text">
-						<span class="name">username</span>
-						<span class="email">62xxxxxxxxx</span>
+				<span class="text"
+					><span class="a">A</span><span class="p">p</span>'sApi</span
+				>
+			</a>
+			<ul class="side-menu top">
+				<li class="active">
+					<a id="dashboard">
+						<i class="bx bxs-dashboard"></i>
+						<span class="text">Dashboard</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="bx bxs-shopping-bag-alt"></i>
+						<span class="text">My Store</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="bx bxs-doughnut-chart"></i>
+						<span class="text">Analytics</span>
+					</a>
+				</li>
+
+				<li>
+					<a id="downloader">
+						<i class="bx bxs-cloud-download"></i>
+						<span class="text">downloader</span>
+					</a>
+				</li>
+				<li>
+					<a id="imgsrc">
+						<i class="bx bxs-image-alt"></i>
+						<span class="text">image search</span>
+					</a>
+				</li>
+			</ul>
+
+			<ul class="side-menu">
+				<li>
+					<a href="#">
+						<i class="bx bxs-cog"></i>
+						<span class="text">Settings</span>
+					</a>
+				</li>
+				<li>
+					<a href="#" class="logout">
+						<i class="bx bxs-log-out-circle"></i>
+						<span class="text">Logout</span>
+					</a>
+				</li>
+			</ul>
+		</section>
+		<!-- SIDEBAR -->
+
+		<!-- CONTENT -->
+		<section id="content">
+			<!-- NAVBAR -->
+			<nav>
+				<i class="bx bx-menu"></i>
+				<a href="#" class="nav-link">Categories</a>
+				<div class="wellcome">
+					<h3>Welcome User</h3>
+				</div>
+				<input type="checkbox" id="switch-mode" hidden />
+				<label for="switch-mode" class="switch-mode"></label>
+				<div class="userdata">
+					<h5>username</h5>
+					<h4>62xxxxxxxxx</h4>
+				</div>
+				<a href="#" class="profile">
+					<i class="bx bxs-user-circle"></i>
+				</a>
+			</nav>
+			<!-- NAVBAR -->
+
+			<!-- MAIN -->
+			<main>
+				<div class="head-title">
+					<div class="left">
+						<h1>Dashboard</h1>
+						<ul class="breadcrumb">
+							<li>
+								<a href="#">Dashboard</a>
+							</li>
+							<li><i class="bx bx-chevron-right"></i></li>
+							<li>
+								<a id="feature-name" class="active" href="#">Home</a>
+							</li>
+						</ul>
 					</div>
 				</div>
-				<script type="text/javascript" charset="utf-8">
-					const xhr = new XMLHttpRequest();
-					xhr.open("GET", "/auth/dash");
-					xhr.responseType = "json";
 
-					xhr.onload = () => {
-						const usr = document.getElementById("data_user");
-						const u = xhr.response;
-						usr.innerHTML = `
-						<span class="name">${u.user}</span>
-						<span class="email">${u.number}</span>
-	   `;
-					};
-					xhr.send();
-				</script>
-			</div>
-		</nav>
+				<div class="content">
+					<div id="ftop">
+						<ul class="box-info">
+							<li>
+								<i class="bx bxs-user-plus"></i>
+								<span class="text">
+									<h3>0</h3>
+									<p>Total User</p>
+								</span>
+							</li>
+							<li>
+								<i class="bx bxs-user-check"></i>
+								<span class="text">
+									<h3>0</h3>
+									<p>User Uogin</p>
+								</span>
+							</li>
+							<li>
+								<i class="bx bxs-dollar-circle"></i>
+								<span class="text">
+									<h3>0</h3>
+									<p>Total Request</p>
+								</span>
+							</li>
+						</ul>
+					</div>
 
-		<!-- Navbar -->
+					<div id="features" class="table-data">
+						<div class="todo">
+							<div class="head">
+								<h3>feature</h3>
+								<i class="bx bx-filter"></i>
+							</div>
+							<ul class="todo-list">
+								<li class="get">
+										<p>feature GET</p>
+									<i class="bx bx-dots-vertical-rounded"></i>
+								</li>
+								<li class="post">
+									<p>feature POST</p>
+									<i class="bx bx-dots-vertical-rounded"></i>
+								</li>
+								<li class="premium">
+									<p>feature Premium</p>
+									<i class="bx bx-dots-vertical-rounded"></i>
+								</li>
+								<li class="free">
+									<p>feature Gratis</p>
+									<i class="bx bx-dots-vertical-rounded"></i>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</main>
+			<!-- MAIN -->
+		</section>
+		<!-- CONTENT -->
 
-		<nav class="navbar flex shadow">
-			<i class="bx bx-menu" id="sidebar-open"></i>
-			<h3>Content Title</h3>
-			<span class="nav_image">
-				<img src="images/profile.jpg" alt="logo_img" />
-			</span>
-		</nav>
-		<!-- content -->
-		<div class="content">
-			<div class="c-card">
-				<h1>content here</h1>
-			</div>
-		</div>
+		<script src="script.js"></script>
 	</body>
 </html>

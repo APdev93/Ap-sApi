@@ -83,8 +83,8 @@ async function Main() {
 		res.sendFile("./public/pages/dashboard/index.html", rootPath);
 	});
 	app.get("/", (req, res) => {
-	   let ip = req.ip
-	   console.log(`request from: ${ip}`)
+		let ip = req.ip;
+		console.log(`request from: ${ip}`);
 		res.sendFile("./public/index.html", rootPath);
 	});
 	app.get("/masuk", (req, res) => {
@@ -132,7 +132,8 @@ async function Main() {
 
 	/*Pengalihan jika route url tidak ada, tidak boleh di pindah ke atas*/
 	app.use("/", (req, res) => {
-		res.status(404).json({ msg: conn.msg.notfound });
+		res.status(404);
+		res.sendFile("./public/404.html", rootPath)
 	});
 }
 

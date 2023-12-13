@@ -84,7 +84,7 @@ router.get("/downloader/yt", checkKey, async (req, res, next) => {
 	}
 });
 
-router.get("/downloader/mediafire", checkKey, async (req, res, next) => {
+router.get("/downloader/mf", checkKey, async (req, res, next) => {
 	let url = req.query.url;
 	if (url) {
 		try {
